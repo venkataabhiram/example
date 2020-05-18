@@ -1,0 +1,34 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description" : " creating a new auto scaling polocy",
+    "Resources": {
+        "ASSPW149": {
+            "Type": "AWS::AutoScaling::ScalingPolicy",
+            "Properties": {
+                "AutoScalingGroupName" : "reservoir",
+                "AdjustmentType":"PercentChangeInCapacity",
+                "PolicyType":"StepScaling",
+                 "MetricAggregationType":"Average",
+                 "EstimatedInstanceWarmup":60,
+                 "MinAdjustmentMagnitude" : "2",
+                 "StepAdjustments":[
+                   {
+                   "MetricIntervalLowerBound":0,
+                    "MetricIntervalUpperBound":70,
+                     "ScalingAdjustment":1
+                    },
+                    {
+                   "MetricIntervalLowerBound":70,
+                   "MetricIntervalUpperBound":80,
+                   "ScalingAdjustment":2
+                    },
+                 {
+                   "MetricIntervalLowerBound": 80,
+                   "ScalingAdjustment":3
+          }
+        ]
+
+                        } 
+                    }
+                }
+            }   
