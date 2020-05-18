@@ -1,0 +1,57 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description" : " creating a new auto scaling group",
+    "Resources": { 
+        "ASASG1P1BG": {
+            "Type": "AWS::AutoScaling::AutoScalingGroup",
+            "Properties" : {
+                "ImageId" : "ami-0915e09cc7ceee3ab",
+                "InstanceType" : "t2.micro",
+                " LaunchConfigurationName" : "abhi",
+                "AutoScalingGroupName" : "abhi",
+                "AvailabilityZones" : ["us-east-1a"],
+                "DesiredCapacity" : "1",
+                "HealthCheckGracePeriod" : "5",
+                "HealthCheckType" : "stopping",
+                "LoadBalancerNames" : [" Application Load Balancer"],
+                "MaxInstanceLifetime" : "701255",
+                "MaxSize" : "3",
+                "MetricsCollection" : [
+                    {
+                    "Granularity" : "1",
+                    "Metrics" : ["GroupMinSize = 1","GroupMaxSize = 3"] }
+
+                                                   
+                                                   ] ,
+                            "MinSize" :"1",
+                             "NotificationConfigurations" : [
+                               {
+      "TopicARN" : { "Ref" : "topic1" },
+      "NotificationTypes" : [
+        "autoscaling:EC2_INSTANCE_LAUNCH",
+        "autoscaling:EC2_INSTANCE_LAUNCH_ERROR",
+        "autoscaling:EC2_INSTANCE_TERMINATE",
+        "autoscaling:EC2_INSTANCE_TERMINATE_ERROR"
+      ]
+    }
+  ],
+  "Cooldown" : "30",
+  "PolicyType" : "StepScaling",
+  "StepAdjustments" :{
+    "MetricIntervalLowerBound" : 0,
+    "MetricIntervalUpperBound" : 70,
+    "ScalingAdjustment" : 1
+  }
+  
+  
+
+
+
+
+
+
+                  }
+}
+        }
+    }
+  
